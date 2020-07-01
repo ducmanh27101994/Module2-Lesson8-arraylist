@@ -2,6 +2,7 @@
 
 class MyList
 {
+    private $size;
     private $elements;
 
     public function __construct()
@@ -9,17 +10,12 @@ class MyList
         $this->elements = array();
     }
 
-    function size()
-    {
-        return count($this->elements);
-    }
-
     function isEmpty()
     {
         if (!empty($this->elements)) {
             return true;
         } else {
-            return "Khong co gia tri trong mang";
+            return "Khong co gtri trong mang";
         }
     }
 
@@ -33,85 +29,94 @@ class MyList
         return $this->elements;
     }
 
-    function clear()
+    function size()
     {
-        $this->elements = array();
-    }
-
-    function sort()
-    {
-        if ($this->isEmpty()) {
-            sort($this->elements);
-        }
+        return count($this->elements);
     }
 
     function remove($index)
     {
         if ($this->isEmpty()) {
             for ($i = 0; $i < $this->size(); $i++) {
-                if ($index === $i) {
+                if ($index == $i) {
                     array_splice($this->elements, $i, 1);
                 }
             }
+        } else {
+            return "Khong co gia tri de xoa";
         }
     }
-
-    function reset()
-    {
-        $this->elements = array();
-    }
-
-    function addAll($arr)
-    {
-        $this->elements = array_merge($this->elements, $arr);
-    }
-
-    function insert($index, $obj)
-    {
-        if ($this->isEmpty()) {
+    function get($index){
+        if ($this->isEmpty()){
             for ($i = 0; $i < $this->size(); $i++) {
-                if ($index === $i) {
-                    array_splice($this->elements, $i, 1, $obj);
-                }
-            }
-        }
-    }
-
-    function indexOf($obj)
-    {
-        if ($this->isEmpty()) {
-            for ($i = 0; $i < $this->size(); $i++) {
-                if ($obj === $this->elements[$i]) {
+                if ($index === $i){
                     return $this->elements[$i];
                 }
             }
-            return "Khong ton tai gia tri";
         }
     }
+    function clear(){
+        $this->elements=array();
+    }
+    function addAll($arr){
+        $this->elements = array_merge($this->elements,$arr);
+    }
+    function indexOf($obj){
+        if ($this->isEmpty()){
+            for ($i = 0; $i < $this->size(); $i++) {
+                if ($obj === $this->elements[$i]){
+                    $arr[] = $i;
+                }
+            }
+            return $arr;
+        } else {
+            return "Ko co gia tri trong mang";
+        }
+    }
+    function sort(){
+        if ($this->isEmpty()){
+            sort($this->elements);
+        }
+    }
+    function insert($index,$obj){
+        if($this->isEmpty()){
+            for ($i = 0; $i < $this->size(); $i++) {
+                if ($index === $i){
+                    array_splice($this->elements,$i,1,$obj);
+                }
+            }
+
+        }
+
+
+    }
+
 
 }
 
-$mylist = new MyList();
+$myList = new MyList();
+echo $myList->isEmpty();
+$myList->add(5);
+$myList->add(10);
+$myList->add(-6);
+$myList->add(7);
+$myList->add(-9);
+$myList->add(3);
+echo "<br>";
+echo $myList->isEmpty();
+echo "<br>";
+echo $myList->size();
+echo "<br>";
+$myList->remove(2);
+echo "<br>";
+echo $myList->get(3);
+$myList->addAll([4,7,10]);
+echo "<br>";
+print_r($myList->indexOf(10));
+$myList->sort();
+$myList->insert(4,6);
 
-echo $mylist->isEmpty();
-
-$mylist->add(10);
-$mylist->add(-4);
-$mylist->add(3);
-$mylist->add(-7);
-$mylist->add(8);
-echo "<br>";
-echo $mylist->size();
-echo "<br>";
-echo $mylist->sort();
-echo "<br>";
-echo $mylist->remove(2);
-echo "<br>";
-$mylist->addAll([2, 4, -10, 5]);
-$mylist->insert(4, 20);
-echo "<br>";
-echo $mylist->indexOf(30);
 
 echo "<pre>";
-print_r($mylist->getElements());
+print_r($myList->getElements());
 echo "</pre>";
