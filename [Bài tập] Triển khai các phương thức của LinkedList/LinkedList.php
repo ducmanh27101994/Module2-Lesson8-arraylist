@@ -102,7 +102,9 @@ class LinkedList
             }
         }
     }
-    function delete($index){
+
+    function delete($index)
+    {
         $current = $this->firstNode;
         $pre = $this->firstNode;
 
@@ -113,19 +115,42 @@ class LinkedList
         $pre->next = $current->next;
         $this->count--;
     }
-    function totalNode(){
+
+    function totalNode()
+    {
         return $this->count;
     }
 
-   function find($index){
+    function find($data)
+    {
+
         $current = $this->firstNode;
 
+        while ($current !== NULL){
+            if ($current->getNode() ===$data){
+                return $current->getNode();
+            }
+            $current = $current->next;
+        }
+    }
+    function indexOf($data)
+    {
+        $index = 0;
+        $current = $this->firstNode;
 
-
-   }
+        while ($current !== NULL){
+            if ($current->getNode() ===$data){
+                $arr[] = $index;
+            }
+            $current = $current->next;
+            $index++;
+        }
+        return $arr;
+    }
 
 
 }
+
 $linkedList = new LinkedList();
 $linkedList->addFirst('O');
 $linkedList->addFirst('L');
@@ -133,15 +158,17 @@ $linkedList->addFirst('L');
 $linkedList->addFirst('E');
 $linkedList->addFirst('H');
 $linkedList->addLast('W');
-
+$linkedList->add(1, "G");
 $linkedList->add(2, "A");
 $linkedList->deleteFirst();
 $linkedList->deleteLast();
 $linkedList->delete(2);
 echo $linkedList->totalNode();
+echo "<br>";
 
-
-
+echo $linkedList->find("G");
+echo "<br>";
+print_r($linkedList->indexOf("L"));
 
 echo "<pre>";
 print_r($linkedList->getLinkedList());
