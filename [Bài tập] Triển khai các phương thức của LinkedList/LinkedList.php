@@ -132,6 +132,7 @@ class LinkedList
             }
             $current = $current->next;
         }
+
     }
     function indexOf($data)
     {
